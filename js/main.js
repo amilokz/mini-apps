@@ -3,16 +3,13 @@ window.addEventListener("load", () => {
   const splash = document.getElementById("splashScreen");
   if (!splash) return;
 
-  // Show splash for 1.2s
   setTimeout(() => {
-    splash.style.opacity = "0"; // fade out
-
-    // remove splash & show main content
+    splash.style.opacity = "0";
     setTimeout(() => {
       splash.remove();
-      document.body.classList.add("loaded"); // fade in main
-    }, 600); // match CSS fade duration
-  }, 1200);
+      document.body.classList.add("loaded"); // show main apps
+    }, 600);
+  }, 1500);
 });
 
 // ===== Toast =====
@@ -30,22 +27,18 @@ function toast(msg, delay = 3000) {
   el.addEventListener("hidden.bs.toast", () => el.remove());
 }
 
-// ===== IndexedDB for Todo & Weather =====
+// ===== IndexedDB =====
 let db;
 const request = indexedDB.open('MiniAppsDB', 1);
-
 request.onupgradeneeded = e => {
   db = e.target.result;
-  if (!db.objectStoreNames.contains('tasks'))
-    db.createObjectStore('tasks', { keyPath: 'id', autoIncrement:true });
-  if (!db.objectStoreNames.contains('weather'))
-    db.createObjectStore('weather', { keyPath: 'city' });
+  if (!db.objectStoreNames.contains('tasks')) db.createObjectStore('tasks', { keyPath: 'id', autoIncrement:true });
+  if (!db.objectStoreNames.contains('weather')) db.createObjectStore('weather', { keyPath: 'city' });
 };
-
 request.onsuccess = e => db = e.target.result;
 request.onerror = e => console.error('IndexedDB error', e);
-
 window.db = db;
+
 window.saveTaskToDB = function(task) {
   if (!db) return;
   const tx = db.transaction('tasks', 'readwrite');
@@ -71,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const todoForm = document.getElementById("todoForm");
   const taskInput = document.getElementById("taskInput");
   const taskList = document.getElementById("taskList");
-
   let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
   function renderTasks() {
@@ -79,10 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tasks.forEach((task, index) => {
       const taskEl = document.createElement("div");
       taskEl.className = "task d-flex justify-content-between align-items-center";
-      taskEl.innerHTML = `
-        <span>${task}</span>
-        <button class="btn btn-sm btn-danger">Delete</button>
-      `;
+      taskEl.innerHTML = `<span>${task}</span><button class="btn btn-sm btn-danger">Delete</button>`;
       taskEl.querySelector("button").addEventListener("click", () => {
         tasks.splice(index, 1);
         localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -99,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!value) return;
     tasks.push(value);
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    window.saveTaskToDB(value); // save in IndexedDB
+    window.saveTaskToDB(value);
     taskInput.value = "";
     renderTasks();
     window.toast('Task added!');
@@ -146,8 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div>${data.weather[0].description}</div>
           <div>🌡 ${data.main.temp}°C | 💧 ${data.main.humidity}% | 🌬 ${data.wind.speed} m/s</div>
         </div>
-      </div>
-    `;
+      </div>`;
   }
 
   weatherBtn.addEventListener("click", () => {
@@ -171,7 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const screen = document.getElementById("calcScreen");
   let expr = "";
-
   document.querySelectorAll(".key").forEach(btn => {
     btn.addEventListener("click", () => {
       if (btn.textContent === "=") {
