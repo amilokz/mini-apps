@@ -23,6 +23,7 @@ body {
   padding: 20px;
 }
 
+/* App cards */
 .app-card {
   background: #0b1220;
   padding: 20px;
@@ -36,18 +37,9 @@ body {
   font-weight: 600;
   border: none;
 }
-
 .btn-accent:hover {
   background: #05a4c0;
   color: #fff;
-}
-
-/* Tasks */
-.task {
-  background: #111827;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 6px;
 }
 
 /* Calculator */
@@ -59,13 +51,11 @@ body {
   border-radius: 8px;
   margin-bottom: 10px;
 }
-
 .calc-keys {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
 }
-
 .key {
   padding: 14px;
   background: #111827;
@@ -73,4 +63,30 @@ body {
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
+}
+
+/* Tasks */
+.task {
+  background: #111827;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+/* Splash screen */
+#splashScreen {
+  position: fixed;
+  inset: 0;
+  background: #06b6d4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+  transition: opacity 0.6s ease;
+}
+
+.splash-icon {
+  width: 100px;
+  height: auto;
 }
