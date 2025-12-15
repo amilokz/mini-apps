@@ -1,25 +1,21 @@
 let db;
 const request = indexedDB.open('MiniAppsDB', 1);
-
 request.onupgradeneeded = e => {
   db = e.target.result;
-  if(!db.objectStoreNames.contains('tasks')) db.createObjectStore('tasks', { keyPath: 'id' });
+  if(!db.objectStoreNames.contains('tasks')) db.createObjectStore('tasks', { keyPath: 'id', autoIncrement:true });
   if(!db.objectStoreNames.contains('weather')) db.createObjectStore('weather', { keyPath: 'city' });
 };
-
 request.onsuccess = e => db = e.target.result;
 request.onerror = e => console.error('IndexedDB error', e);
 
 function saveTaskToDB(task) {
   const tx = db.transaction('tasks', 'readwrite');
-  tx.objectStore('tasks').put(task);
-  return tx.complete;
+  tx.objectStore('tasks').put({ task, id: Date.now() });
 }
 
 function saveWeatherToDB(city, data) {
   const tx = db.transaction('weather', 'readwrite');
   tx.objectStore('weather').put({ city, data, time: Date.now() });
-  return tx.complete;
 }
 
 function getWeatherFromDB(city) {

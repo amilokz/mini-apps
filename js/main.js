@@ -6,16 +6,14 @@ window.addEventListener('load', () => {
     splash.style.opacity = '0';
     setTimeout(() => splash.remove(), 800);
   }, 1200);
+
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('service-worker.js')
+      .then(()=>console.log('SW Registered ✅'))
+      .catch(err=>console.error(err));
+  }
 });
 
-// Service Worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(() => console.log('Service Worker Registered ✅'))
-      .catch(err => console.error('SW registration failed', err));
-  });
-}
 
 // Notifications
 if ('Notification' in window) {

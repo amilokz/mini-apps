@@ -1,5 +1,7 @@
-const CACHE_NAME = 'mini-apps-v1';
+const CACHE_NAME = 'mini-apps-v2';
 const OFFLINE_URL = '/index.html';
+
+// Files to cache
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
@@ -15,16 +17,18 @@ const FILES_TO_CACHE = [
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'
 ];
 
-self.addEventListener('install', e => {
-  e.waitUntil(
+// Install event: cache everything
+self.addEventListener('install', event => {
+  event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES_TO_CACHE))
       .then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(
+// Activate event: clean old caches
+self.addEventListener('activate', event => {
+  event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.map(key => key !== CACHE_NAME ? caches.delete(key) : null)
     ))
@@ -32,20 +36,36 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', e => {
-  if (e.request.url.includes('openweathermap.org/img/wn/')) {
-    e.respondWith(
+// Fetch event: cache-first strategy
+self.addEventListener('fetch', event => {
+
+  // Weather icons caching
+  if (event.request.url.includes('openweathermap.org/img/wn/')) {
+    event.respondWith(
       caches.open('weather-icons').then(cache => 
-        cache.match(e.request).then(resp => 
-          resp || fetch(e.request).then(f => { cache.put(e.request, f.clone()); return f; })
+        cache.match(event.request).then(resp => 
+          resp || fetch(event.request).then(fetched => {
+            cache.put(event.request, fetched.clone());
+            return fetched;
+          })
         )
       )
     );
     return;
   }
 
-  e.respondWith(
-    caches.match(e.request).then(resp => resp || fetch(e.request))
-      .catch(() => caches.match(OFFLINE_URL))
+  // General files
+  event.respondWith(
+    caches.match(event.request).then(resp => {
+      return resp || fetch(event.request)
+        .then(fetchResp => {
+          // Cache fetched files dynamically
+          return caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, fetchResp.clone());
+            return fetchResp;
+          });
+        })
+        .catch(() => caches.match(OFFLINE_URL));
+    })
   );
 });
