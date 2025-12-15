@@ -74,19 +74,3 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
-
-/* ===== SPLASH SCREEN ===== */
-#splashScreen {
-  position: fixed;
-  inset: 0;
-  background: #06b6d4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 99999;
-}
-
-.splash-icon {
-  width: 100px;
-}
