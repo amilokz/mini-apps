@@ -1,3 +1,4 @@
+/* ===== Body & Reset ===== */
 body {
   margin: 0;
   padding-top: 70px;
@@ -7,84 +8,17 @@ body {
   overflow-x: hidden;
 }
 
-/* Navbar */
+/* ===== Navbar ===== */
 .topbar {
   background: #050c1a;
   border-bottom: 1px solid #111;
 }
-.brand { font-weight: 700; }
 
-/* App container */
-.app-wrap {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
-
-  /* hidden under splash */
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.brand {
+  font-weight: 700;
 }
 
-/* After splash removed */
-body.loaded .app-wrap {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateY(0);
-}
-
-/* App cards */
-.app-card {
-  background: #0b1220;
-  padding: 20px;
-  border-radius: 12px;
-}
-
-/* Buttons */
-.btn-accent {
-  background: #06b6d4;
-  color: #000;
-  border: none;
-  font-weight: 600;
-}
-.btn-accent:hover {
-  background: #05a4c0;
-  color: #fff;
-}
-
-/* Tasks */
-.task {
-  background: #111827;
-  padding: 10px;
-  border-radius: 8px;
-  margin-bottom: 6px;
-}
-
-/* Calculator */
-.calc-screen {
-  background: #020617;
-  padding: 15px;
-  font-size: 1.5rem;
-  text-align: right;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-.calc-keys {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-.key {
-  padding: 14px;
-  background: #111827;
-  border: none;
-  color: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* ===== SPLASH SCREEN ===== */
+/* ===== Splash Screen ===== */
 #splashScreen {
   position: fixed;
   top: 0;
@@ -96,12 +30,139 @@ body.loaded .app-wrap {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 99999; /* always on top */
+  z-index: 99999;
   opacity: 1;
-  pointer-events: all; /* block clicks */
+  pointer-events: all;
   transition: opacity 0.6s ease;
 }
+
 .splash-icon {
   width: 100px;
   height: auto;
+}
+
+.splash-text {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+/* ===== App Container (hidden initially) ===== */
+.app-wrap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+body.loaded .app-wrap {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+/* ===== App Card ===== */
+.app-card {
+  background: #0b1220;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* ===== Buttons ===== */
+.btn-accent {
+  background: #06b6d4;
+  color: #000;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-accent:hover {
+  background: #05a4c0;
+  color: #fff;
+}
+
+/* ===== Tasks ===== */
+.task {
+  background: #111827;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===== Calculator ===== */
+.calc-screen {
+  background: #020617;
+  padding: 15px;
+  font-size: 1.5rem;
+  text-align: right;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  min-height: 50px;
+  word-wrap: break-word;
+}
+
+.calc-keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.key {
+  padding: 14px;
+  background: #111827;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.key:hover {
+  background: #1f2937;
+}
+
+/* ===== Weather Result ===== */
+#weatherResult {
+  margin-top: 10px;
+  padding: 10px;
+  background: #111827;
+  border-radius: 8px;
+}
+
+#weatherResult img {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+}
+
+/* ===== Toast Area ===== */
+#toastArea {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 576px) {
+  .calc-screen {
+    font-size: 1.2rem;
+    padding: 10px;
+  }
+
+  .key {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .app-wrap {
+    padding: 10px;
+  }
 }
