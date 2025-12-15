@@ -2,7 +2,7 @@ const cityInput = document.getElementById("cityInput");
 const weatherBtn = document.getElementById("weatherBtn");
 const weatherResult = document.getElementById("weatherResult");
 
-const OPENWEATHER_API_KEY = ""; 
+const OPENWEATHER_API_KEY = "14d36b95fec4605d7387fbd001d588e6"; 
 
 // Show toast function (from main.js)
 function toast(msg, delay = 3000) {

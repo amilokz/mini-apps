@@ -1,5 +1,5 @@
 const CACHE_NAME = 'mini-apps-v2';
-const OFFLINE_URL = 'index.html'; // relative path for GitHub Pages
+const OFFLINE_URL = 'index.html';
 
 const FILES_TO_CACHE = [
   "index.html",
@@ -15,7 +15,6 @@ const FILES_TO_CACHE = [
   "favicon/favicon.ico",
   "favicon/apple-touch-icon.png"
 ];
-
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -35,6 +34,10 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+  // Skip chrome-extension:// requests
+  if (event.request.url.startsWith('chrome-extension://')) return;
+
+  // Special caching for weather icons
   if (event.request.url.includes('openweathermap.org/img/wn/')) {
     event.respondWith(
       caches.open('weather-icons').then(cache => 
@@ -49,6 +52,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Normal cache-first strategy
   event.respondWith(
     caches.match(event.request).then(resp => {
       return resp || fetch(event.request)
