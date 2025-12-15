@@ -1,23 +1,23 @@
-const CACHE_NAME = 'mini-apps-v3';
-const OFFLINE_URL = 'index.html';
+const CACHE_NAME = 'mini-apps-v4';
+const OFFLINE_URL = './index.html';
 
 const FILES_TO_CACHE = [
-  "index.html",
-  "style.css",
-  "js/main.js",
-  "js/todo.js",
-  "js/weather.js",
-  "js/calculator.js",
-  "icons/icon-192.png",
-  "icons/icon-512.png",
-  "favicon/favicon-96x96.png",
-  "favicon/favicon.svg",
-  "favicon/favicon.ico",
-  "favicon/apple-touch-icon.png",
-  "favicon/site.webmanifest"
+  "./index.html",
+  "./style.css",
+  "./js/main.js",
+  "./js/todo.js",
+  "./js/weather.js",
+  "./js/calculator.js",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./favicon/favicon-96x96.png",
+  "./favicon/favicon.svg",
+  "./favicon/favicon.ico",
+  "./favicon/apple-touch-icon.png",
+  "./favicon/site.webmanifest"
 ];
 
-// Install service worker
+// Install
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -26,7 +26,7 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activate service worker
+// Activate
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -36,12 +36,10 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// Fetch requests
+// Fetch
 self.addEventListener('fetch', event => {
-  // Skip Chrome extensions
   if (event.request.url.startsWith('chrome-extension://')) return;
 
-  // Special cache for OpenWeather icons
   if (event.request.url.includes('openweathermap.org/img/wn/')) {
     event.respondWith(
       caches.open('weather-icons').then(cache =>
@@ -56,7 +54,6 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Normal cache-first strategy
   event.respondWith(
     caches.match(event.request).then(resp => {
       return resp || fetch(event.request).then(fetchResp => {
