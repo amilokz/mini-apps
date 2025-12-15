@@ -2,13 +2,7 @@ const cityInput = document.getElementById("cityInput");
 const weatherBtn = document.getElementById("weatherBtn");
 const weatherResult = document.getElementById("weatherResult");
 
-const OPENWEATHER_API_KEY = "14d36b95fec4605d7387fbd001d588e6"; // <- Put your API key here
-
-// Elements for showing data
-const elIcon = document.createElement("img");
-elIcon.style.width = "60px";
-elIcon.style.height = "60px";
-weatherResult.appendChild(elIcon);
+const OPENWEATHER_API_KEY = "14d36b95fec4605d7387fbd001d588e6"; 
 
 // Show toast function (from main.js)
 function toast(msg, delay = 3000) {
@@ -28,7 +22,7 @@ function toast(msg, delay = 3000) {
   el.addEventListener('hidden.bs.toast', () => el.remove());
 }
 
-// Fetch weather
+// Fetch weather from API
 async function fetchWeather(city) {
   try {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${OPENWEATHER_API_KEY}&units=metric`;
@@ -36,7 +30,8 @@ async function fetchWeather(city) {
     if (!res.ok) throw new Error("City not found");
     const data = await res.json();
     showWeather(data);
-    saveWeatherToDB(city, data); // offline save
+    saveWeatherToDB(city, data); // save offline
+    localStorage.setItem("lastCity", city); // save last searched city
   } catch (err) {
     // Try offline data
     const offlineData = await getWeatherFromDB(city);
@@ -50,7 +45,7 @@ async function fetchWeather(city) {
   }
 }
 
-// Show weather data
+// Display weather data
 function showWeather(data) {
   weatherResult.classList.remove("d-none");
   weatherResult.innerHTML = `
@@ -72,13 +67,16 @@ weatherBtn.addEventListener("click", () => {
   fetchWeather(city);
 });
 
-// Optional: press Enter to search
+// Press Enter to search
 cityInput.addEventListener("keyup", e => {
   if (e.key === "Enter") weatherBtn.click();
 });
 
 // Load last searched city on page load
 window.addEventListener("load", async () => {
-  const lastCity = cityInput.value.trim();
-  if (lastCity) fetchWeather(lastCity);
+  const lastCity = localStorage.getItem("lastCity");
+  if (lastCity) {
+    cityInput.value = lastCity;
+    fetchWeather(lastCity);
+  }
 });
