@@ -1,32 +1,32 @@
-// ===== Splash Screen =====
+// ===== Splash Screen (FORCED REMOVE) =====
 window.addEventListener("load", () => {
   const splash = document.getElementById("splashScreen");
-  
-  // Show splash for 1 second, then fade out
+
+  if (!splash) return;
+
   setTimeout(() => {
-    splash.style.opacity = "0"; // fade
+    splash.style.transition = "opacity 0.6s ease";
+    splash.style.opacity = "0";
+
     setTimeout(() => {
-      splash.style.display = "none"; // remove from layout
-    }, 800); // match CSS transition
-  }, 1000); // 1 second splash screen
+      splash.remove(); // 🔥 remove from DOM completely
+    }, 600);
+  }, 1000);
 });
 
-// ===== Toast Function =====
+// ===== Toast =====
 function toast(msg, delay = 3000) {
-  const id = 't' + Date.now();
-  const el = document.createElement('div');
-  el.className = 'toast align-items-center text-white bg-dark border-0';
-  el.role = 'alert';
-  el.id = id;
+  const el = document.createElement("div");
+  el.className = "toast align-items-center text-white bg-dark border-0";
   el.innerHTML = `
     <div class="d-flex">
       <div class="toast-body">${msg}</div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto"></button>
     </div>`;
   document.body.appendChild(el);
   const bs = new bootstrap.Toast(el, { delay });
   bs.show();
-  el.addEventListener('hidden.bs.toast', () => el.remove());
+  el.addEventListener("hidden.bs.toast", () => el.remove());
 }
 
 // ===== Calculator =====
@@ -35,7 +35,7 @@ let expr = "";
 
 document.querySelectorAll(".key").forEach(btn => {
   btn.addEventListener("click", () => {
-    if(btn.textContent === "=") {
+    if (btn.textContent === "=") {
       try {
         expr = Function("return " + expr)().toString();
       } catch {
