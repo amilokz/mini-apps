@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Komil Mini Apps</title>
 
-  <!-- Manifest & Theme -->
+  <!-- Manifest -->
   <link rel="manifest" href="favicon/site.webmanifest">
   <meta name="theme-color" content="#06b6d4">
 
-  <!-- Favicon & Apple Touch Icons -->
+  <!-- Favicon & Apple Icons -->
   <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
   <link rel="shortcut icon" href="favicon/favicon.ico">
@@ -21,7 +21,7 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <!-- Your CSS -->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -47,10 +47,11 @@
 </div>
 
 <!-- Main Content -->
-<main class="app-wrap mt-4">
-  <!-- TODO App -->
+<main class="container app-wrap mt-4">
+
+  <!-- To-Do App -->
   <section id="todo" class="mb-5">
-    <div class="app-card">
+    <div class="app-card p-3">
       <h4>To-Do App</h4>
       <form id="todoForm" class="row g-2 mt-3">
         <div class="col-md-8">
@@ -66,7 +67,7 @@
 
   <!-- Weather App -->
   <section id="weather" class="mb-5">
-    <div class="app-card">
+    <div class="app-card p-3">
       <h4>Weather App</h4>
       <div class="input-group mt-3">
         <input id="cityInput" class="form-control" placeholder="City name">
@@ -78,7 +79,7 @@
 
   <!-- Calculator App -->
   <section id="calculator" class="mb-5">
-    <div class="app-card">
+    <div class="app-card p-3">
       <h4>Calculator</h4>
       <div id="calcScreen" class="calc-screen">0</div>
       <div class="calc-keys">
@@ -89,15 +90,15 @@
       </div>
     </div>
   </section>
+
 </main>
 
-<!-- Toast area -->
 <div id="toastArea" class="position-fixed bottom-0 end-0 p-3"></div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- JS -->
+<!-- Custom JS -->
 <script src="js/db.js"></script>
 <script src="js/todo.js"></script>
 <script src="js/weather.js"></script>
