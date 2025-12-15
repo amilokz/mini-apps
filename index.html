@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Komil Mini Apps</title>
 
   <!-- Manifest & Theme -->
   <link rel="manifest" href="./favicon/site.webmanifest">
   <meta name="theme-color" content="#06b6d4">
 
-  <!-- Favicon & Apple Touch Icons -->
+  <!-- Favicon & Apple Touch Icon -->
   <link rel="icon" type="image/png" sizes="96x96" href="./favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg">
   <link rel="shortcut icon" href="./favicon/favicon.ico">
@@ -21,7 +21,7 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <!-- Your CSS -->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -41,15 +41,15 @@
 </nav>
 
 <!-- Splash Screen -->
-<div id="splashScreen" class="d-flex justify-content-center align-items-center position-fixed w-100 h-100" style="background:#06b6d4; z-index:9999; flex-direction:column;">
-  <img src="./icons/icon-512.png" alt="Mini Apps" style="width:120px; height:120px;">
+<div id="splashScreen" class="d-flex justify-content-center align-items-center position-fixed w-100 h-100">
+  <img src="./icons/icon-512.png" alt="Mini Apps" class="splash-icon">
   <h2 class="text-white mt-3">Mini Apps</h2>
 </div>
 
 <!-- Main Content -->
-<main class="app-wrap mt-4">
+<main class="app-wrap mt-5 pt-4">
 
-  <!-- TODO App -->
+  <!-- To-Do App -->
   <section id="todo" class="mb-5">
     <div class="app-card">
       <h4>To-Do App</h4>
@@ -77,7 +77,7 @@
     </div>
   </section>
 
-  <!-- Calculator App -->
+  <!-- Calculator -->
   <section id="calculator" class="mb-5">
     <div class="app-card">
       <h4>Calculator</h4>
@@ -93,13 +93,13 @@
 
 </main>
 
-<!-- Toast area -->
+<!-- Toast Area -->
 <div id="toastArea" class="position-fixed bottom-0 end-0 p-3"></div>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- JS -->
+<!-- JS Files -->
 <script src="./js/db.js"></script>
 <script src="./js/todo.js"></script>
 <script src="./js/weather.js"></script>
