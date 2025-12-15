@@ -1,14 +1,4 @@
-// ===== SPLASH SCREEN LOGIC =====
-window.addEventListener("load", () => {
-  const splash = document.getElementById("splashScreen");
-  setTimeout(() => {
-    splash.style.opacity = "0"; // fade out
-    setTimeout(() => {
-      splash.remove(); // remove from DOM
-      document.body.classList.add("loaded"); // show main apps
-    }, 600);
-  }, 1500); // splash duration 1.5s
-});
+
 
 // ===== TODO APP =====
 document.addEventListener("DOMContentLoaded", () => {
