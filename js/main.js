@@ -1,10 +1,14 @@
 // ===== Splash Screen =====
 window.addEventListener("load", () => {
   const splash = document.getElementById("splashScreen");
+  
+  // Show splash for 1 second, then fade out
   setTimeout(() => {
-    splash.style.opacity = "0";
-    setTimeout(() => splash.style.display = "none", 800);
-  }, 1000); // 1 second visible
+    splash.style.opacity = "0"; // fade
+    setTimeout(() => {
+      splash.style.display = "none"; // remove from layout
+    }, 800); // match CSS transition
+  }, 1000); // 1 second splash screen
 });
 
 // ===== Toast Function =====
@@ -28,12 +32,19 @@ function toast(msg, delay = 3000) {
 // ===== Calculator =====
 const screen = document.getElementById("calcScreen");
 let expr = "";
+
 document.querySelectorAll(".key").forEach(btn => {
-  btn.onclick = () => {
+  btn.addEventListener("click", () => {
     if(btn.textContent === "=") {
-      try { expr = Function("return " + expr)().toString(); }
-      catch { expr = ""; }
-    } else { expr += btn.textContent; }
+      try {
+        expr = Function("return " + expr)().toString();
+      } catch {
+        expr = "";
+        toast("Invalid calculation");
+      }
+    } else {
+      expr += btn.textContent;
+    }
     screen.textContent = expr || "0";
-  };
+  });
 });
