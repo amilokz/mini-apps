@@ -86,7 +86,4 @@ body {
   width: 100px;
 }
 
-/* Hide app initially */
-.app-hidden {
-  display: none;
-}
+
