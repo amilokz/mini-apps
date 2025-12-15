@@ -2,19 +2,20 @@ const CACHE_NAME = 'mini-apps-v2';
 const OFFLINE_URL = 'index.html'; // relative path for GitHub Pages
 
 const FILES_TO_CACHE = [
-  'index.html',
-  'style.css',
-  'js/main.js',
-  'js/todo.js',
-  'js/weather.js',
-  'js/calculator.js',
-  'icons/icon-192.png',
-  'icons/icon-512.png',
-  'favicon/favicon-96x96.png',
-  'favicon/favicon.svg',
-  'favicon/favicon.ico',
-  'favicon/apple-touch-icon.png'
+  "index.html",
+  "style.css",
+  "js/main.js",
+  "js/todo.js",
+  "js/weather.js",
+  "js/calculator.js",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "favicon/favicon-96x96.png",
+  "favicon/favicon.svg",
+  "favicon/favicon.ico",
+  "favicon/apple-touch-icon.png"
 ];
+
 
 self.addEventListener('install', event => {
   event.waitUntil(
