@@ -37,6 +37,11 @@ body {
   border: none;
 }
 
+.btn-accent:hover {
+  background: #05a4c0;
+  color: #fff;
+}
+
 /* Tasks */
 .task {
   background: #111827;
@@ -70,7 +75,7 @@ body {
   cursor: pointer;
 }
 
-/* SPLASH */
+/* ===== SPLASH SCREEN ===== */
 #splashScreen {
   position: fixed;
   inset: 0;
@@ -85,5 +90,3 @@ body {
 .splash-icon {
   width: 100px;
 }
-
-

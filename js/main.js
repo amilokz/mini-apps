@@ -1,25 +1,19 @@
-// ===== Splash Screen Control =====
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const splash = document.getElementById("splashScreen");
-  const app = document.getElementById("appContent");
 
-  if (!splash || !app) return;
-
-  // Force hide app (extra safety)
-  app.style.display = "none";
+  // 🔥 Reveal body only AFTER everything loads
+  document.body.style.visibility = "visible";
 
   // Show splash for 1 second
   setTimeout(() => {
+    splash.style.transition = "opacity 0.6s ease";
     splash.style.opacity = "0";
-    splash.style.transition = "opacity 0.5s ease";
 
     setTimeout(() => {
       splash.remove();
-      app.style.display = "block"; // 👈 show app ONLY now
-    }, 500);
+    }, 600);
   }, 1000);
 });
-
 
 // ===== Calculator =====
 const screen = document.getElementById("calcScreen");
