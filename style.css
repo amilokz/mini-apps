@@ -20,14 +20,17 @@ body {
   margin: auto;
   padding: 20px;
 
-  /* hidden initially for splash */
+  /* hidden under splash */
   opacity: 0;
+  pointer-events: none;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* After splash removed */
 body.loaded .app-wrap {
   opacity: 1;
+  pointer-events: all;
   transform: translateY(0);
 }
 
@@ -81,16 +84,21 @@ body.loaded .app-wrap {
   cursor: pointer;
 }
 
-/* Splash Screen */
+/* ===== SPLASH SCREEN ===== */
 #splashScreen {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: #06b6d4;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  z-index: 99999;
+  z-index: 99999; /* always on top */
+  opacity: 1;
+  pointer-events: all; /* block clicks */
   transition: opacity 0.6s ease;
 }
 .splash-icon {

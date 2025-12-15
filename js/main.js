@@ -9,7 +9,7 @@ window.addEventListener("load", () => {
       splash.remove();
       document.body.classList.add("loaded"); // show main apps
     }, 600);
-  }, 1500);
+  }, 1500); // splash duration 1.5s
 });
 
 // ===== Toast =====
