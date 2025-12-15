@@ -1,15 +1,12 @@
-/* ===== Body & Reset ===== */
-/* ===== Body fix ===== */
 body {
   margin: 0;
   padding-top: 70px;
   font-family: system-ui;
   background: #071024;
   color: #fff;
-  overflow-x: hidden;
 }
 
-/* ===== Navbar ===== */
+/* Navbar */
 .topbar {
   background: #050c1a;
   border-bottom: 1px solid #111;
@@ -19,7 +16,7 @@ body {
   font-weight: 700;
 }
 
-/* ===== App Container ===== */
+/* App container */
 .app-wrap {
   max-width: 1100px;
   margin: auto;
@@ -30,53 +27,32 @@ body {
   background: #0b1220;
   padding: 20px;
   border-radius: 12px;
-  margin-bottom: 20px;
 }
 
-/* ===== Buttons ===== */
+/* Buttons */
 .btn-accent {
   background: #06b6d4;
   color: #000;
-  border: none;
   font-weight: 600;
+  border: none;
 }
 
-.btn-accent:hover {
-  background: #05a4c0;
-  color: #fff;
-}
-
-.btn-ghost {
-  border: 1px solid #334155;
-  color: #cbd5e1;
-}
-
-.btn-ghost:hover {
-  border-color: #1e293b;
-  color: #fff;
-}
-
-/* ===== Tasks ===== */
+/* Tasks */
 .task {
   background: #111827;
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-/* ===== Calculator ===== */
+/* Calculator */
 .calc-screen {
   background: #020617;
   padding: 15px;
   font-size: 1.5rem;
   text-align: right;
-  margin-bottom: 10px;
   border-radius: 8px;
-  min-height: 50px;
-  word-wrap: break-word;
+  margin-bottom: 10px;
 }
 
 .calc-keys {
@@ -92,13 +68,9 @@ body {
   color: #fff;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
 }
 
-.key:hover {
-  background: #1f2937;
-}
-
+/* SPLASH */
 #splashScreen {
   position: fixed;
   inset: 0;
@@ -112,48 +84,9 @@ body {
 
 .splash-icon {
   width: 100px;
-  height: auto;
 }
 
-
-
-
-
-/* ===== Weather Result ===== */
-#weatherResult {
-  margin-top: 10px;
-  padding: 10px;
-  background: #111827;
-  border-radius: 8px;
-}
-
-#weatherResult img {
-  width: 50px;
-  height: 50px;
-  vertical-align: middle;
-}
-
-/* ===== Toast Area ===== */
-#toastArea {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1050;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 576px) {
-  .calc-screen {
-    font-size: 1.2rem;
-    padding: 10px;
-  }
-
-  .key {
-    padding: 12px;
-    font-size: 1rem;
-  }
-
-  .app-wrap {
-    padding: 10px;
-  }
+/* Hide app initially */
+.app-hidden {
+  display: none;
 }
