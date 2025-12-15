@@ -5,15 +5,16 @@ window.addEventListener("load", () => {
 
   if (!splash || !app) return;
 
+  // 🔥 Show splash for 3 seconds
   setTimeout(() => {
     splash.style.transition = "opacity 0.6s ease";
     splash.style.opacity = "0";
 
     setTimeout(() => {
-      splash.remove();
-      app.style.display = "block";
+      splash.remove();          // remove splash
+      app.style.display = "block"; // show app
     }, 600);
-  }, 1000);
+  }, 3000); // 👈 3 seconds
 });
 
 // ===== Calculator =====
